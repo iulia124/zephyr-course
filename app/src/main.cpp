@@ -3,7 +3,7 @@
 #include <zephyr/drivers/led_strip.h>
 #include <zephyr/logging/log.h>
 
-#define SLEEP_TIME_MS 1000
+#define SLEEP_TIME_MS CONFIG_BLINK_SLEEP_TIME_MS
 #define STRIP_NODE DT_ALIAS(led_strip)
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
