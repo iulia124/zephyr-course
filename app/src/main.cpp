@@ -3,8 +3,11 @@
 #include <zephyr/drivers/led_strip.h>
 #include <zephyr/logging/log.h>
 
-#define SLEEP_TIME_MS CONFIG_BLINK_SLEEP_TIME_MS
-#define STRIP_NODE DT_ALIAS(led_strip)
+//#define SLEEP_TIME_MS CONFIG_BLINK_SLEEP_TIME_MS
+#define SLEEP_TIME_MS CONFIG_APP_HEARTBEAT_PERIOD_MS
+//#define STRIP_NODE DT_ALIAS(led_strip)
+#define STRIP_NODE DT_ALIAS(app_led)
+//#define STRIP_NODE DT_ALIAS(led0)
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
@@ -27,8 +30,8 @@ int main(void)
 
         if (led_on) {
             pixel.r = 0;
-            pixel.g = 32;
-            pixel.b = 0;
+            pixel.g = 0;
+            pixel.b = 32;
         } else {
             pixel.r = 0;
             pixel.g = 0;

@@ -9,6 +9,9 @@
 / {
 	aliases {
 		led-strip = &led_strip;
+		//led0 = &led_strip;
+//led0 used for heartbeat demo; esp32 c5 only has one addressable //led controlled through a single data line
+		app-led = &led_strip;
 	};
 };
 
