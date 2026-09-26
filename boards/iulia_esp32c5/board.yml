@@ -1,0 +1,6 @@
+board:
+  name: iulia_esp32c5
+  full_name: ESP32-C5-DevKitC-1
+  vendor: espressif
+  socs:
+  - name: esp32c5
