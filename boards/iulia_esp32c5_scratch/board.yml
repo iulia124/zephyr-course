@@ -1,0 +1,6 @@
+board:
+  name: iulia_esp32c5_scratch
+  full_name: Iulia ESP32-C5 Scratch Board
+  vendor: espressif
+  socs:
+    - name: esp32c5
