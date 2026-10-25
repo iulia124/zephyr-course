@@ -4,10 +4,12 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <errno.h>
+#include <iulia_drivers/iulia_led_sensor.h>
 
 #define DT_DRV_COMPAT iulia_led_sensor
 
 LOG_MODULE_REGISTER(iulia_led_sensor, CONFIG_SENSOR_LOG_LEVEL);
+
 
 /*
  * Static configuration.
@@ -17,6 +19,7 @@ struct iulia_led_sensor_config {
     const struct device *strip;
 };
 
+
 /*
  * Dynamic data.
  * This can change while the application is running.
@@ -25,6 +28,23 @@ struct iulia_led_sensor_data {
     bool led_state;
     uint8_t brightness;
 };
+
+
+/*
+ * Custom extension API
+ *
+ * Changes the brightness parameter stored
+ * in the driver's dynamic data structure.
+ */
+int iulia_led_sensor_set_brightness(const struct device *dev,
+                                    uint8_t brightness)
+{
+    struct iulia_led_sensor_data *data = dev->data;
+
+    data->brightness = brightness;
+
+    return 0;
+}
 
 
 /*
@@ -95,6 +115,9 @@ static int iulia_led_sensor_channel_get(const struct device *dev,
 }
 
 
+/*
+ * Driver initialization.
+ */
 static int iulia_led_sensor_init(const struct device *dev)
 {
     const struct iulia_led_sensor_config *cfg = dev->config;
@@ -105,6 +128,10 @@ static int iulia_led_sensor_init(const struct device *dev)
     }
 
     data->led_state = false;
+
+    /*
+     * Default brightness.
+     */
     data->brightness = 32;
 
     return 0;
@@ -120,6 +147,10 @@ static DEVICE_API(sensor, iulia_led_sensor_api) = {
 };
 
 
+/*
+ * Create one driver instance for every enabled
+ * Devicetree node compatible with "iulia,led-sensor".
+ */
 #define IULIA_LED_SENSOR_DEFINE(inst)                              \
     static struct iulia_led_sensor_data data_##inst;               \
                                                                    \
