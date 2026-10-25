@@ -1,0 +1,8 @@
+menuconfig IULIA_LED_SENSOR
+    bool "Iulia LED sensor driver"
+    default y
+    depends on DT_HAS_IULIA_LED_SENSOR_ENABLED
+    select SENSOR
+    select LED_STRIP
+    help
+      Enable the custom sensor driver controlling the on-board RGB LED.

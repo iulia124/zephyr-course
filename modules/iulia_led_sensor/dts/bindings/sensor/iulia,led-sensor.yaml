@@ -1,0 +1,11 @@
+description: Iulia on-board LED sensor driver
+
+compatible: "iulia,led-sensor"
+
+include: base.yaml
+
+properties:
+  led-strip:
+    type: phandle
+    required: true
+    description: LED strip device controlled by this sensor driver

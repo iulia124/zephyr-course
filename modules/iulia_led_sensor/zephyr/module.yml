@@ -1,0 +1,7 @@
+name: iulia_led_sensor
+
+build:
+  cmake: .
+  kconfig: Kconfig
+  settings:
+    dts_root: .
